@@ -56,7 +56,7 @@ menu = 0
 while True:
     person = Bank()
     menu = person.main()
-    if menu == 5: #4번 프로그램종료 입력시 종료
+    if menu == 5: #5번 프로그램종료 입력시 종료
         print("프로그램을 종료합니다.")
         break
     elif menu == 1: #계좌 생성
