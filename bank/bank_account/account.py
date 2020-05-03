@@ -15,7 +15,7 @@ class Account():
     def manage(self): #잔액 조회
         print("======전체조회======")
         for i in self.account_list :
-            print("계좌번호:", i)
+            print("계좌번호:", i, "/ 이름:", self.name_list[i], "/ 잔액:", self.account_list[i], "원")
         print("====================")
             
     def deposit(self):
