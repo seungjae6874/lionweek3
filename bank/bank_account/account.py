@@ -5,12 +5,25 @@ class Account():
             
         #계좌번호 정수만 입력
         print("\n======계좌개설======\n")
-        account_num = input("계좌번호: ") #계좌는 str
-        name = input("이름: ")
-        self.name_list[account_num] = name
-        self.account_list[account_num] = int(input("예금: "))
-        print("##계좌개설을 완료하였습니다##")
-        print("====================")
+        try:
+            account_num = input("계좌번호: ") #계좌는 str
+            try:
+                name = input("이름: ")
+                self.name_list[account_num] = name
+                try:
+                    self.account_list[account_num] = int(input("예금: "))
+                    print("##계좌개설을 완료하였습니다##")
+                    print("====================")
+                except:
+                    print("금액 입력이 올바르지 않습니다.")
+            except:
+                print("이름 입력이 올바르지 않습니다.")
+        except:
+            print("계좌번호 입력이 올바르지 않습니다.")
+        
+        
+        
+        
             
     def manage(self): #잔액 조회
         print("======전체조회======")
@@ -41,18 +54,21 @@ class Account():
         #해당 계좌에서 출금할 금액 입력 -= 금액
         #만약 출금 금액이 잔액보다 크면 불가
         print("======출금하기======")
-        checkaccount = input("출금하실 계좌번호를 입력해주세요: ")
-        print("계좌이름:", self.name_list[checkaccount])
-        print("계좌잔고:", self.account_list[checkaccount], "원")
-        if checkaccount in self.account_list.keys():
-            withdraw = int(input("출금하실 금액을 입력해주세요: "))
-            if withdraw > self.account_list[checkaccount]: #출금 초과
-                print("잔액 부족")
+        try:
+            checkaccount = input("출금하실 계좌번호를 입력해주세요: ")
+            if checkaccount in self.account_list.keys():
+                print("계좌이름:", self.name_list[checkaccount])
+                print("계좌잔고:", self.account_list[checkaccount], "원")
+                withdraw = int(input("출금하실 금액을 입력해주세요: "))
+                if withdraw > self.account_list[checkaccount]: #출금 초과
+                    print("잔액 부족")
+                else:
+                    self.account_list[checkaccount] -= withdraw
+                    print('\n##계좌잔고: ', self.account_list[checkaccount], "원##")
+                    print("##출금이 완료되었습니다##")
+                    print("====================")
             else:
-                self.account_list[checkaccount] -= withdraw
-                print('\n##계좌잔고: ', self.account_list[checkaccount], "원##")
-                print("##출금이 완료되었습니다##")
-                print("====================")
-        else:
-            print("해당 계좌가 존재하지 않습니다.")
+                print("해당 계좌가 존재하지 않습니다.")
+        except:
+            print("\n===잘못된 계좌번호 입니다.===")
         

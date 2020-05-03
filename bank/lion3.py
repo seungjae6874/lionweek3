@@ -6,11 +6,15 @@ class Bank(Account):
 
     #메인
     def main(self):
-        print("\n======Bank Menu=====")
-        print("1. 계좌개설\n2. 입금하기\n3. 출금하기\n4. 전체조회\n5. 프로그램 종료")
-        print("====================")
-        first = int(input("입력: "))
-        return first
+        try:
+            print("\n======Bank Menu=====")
+            print("1. 계좌개설\n2. 입금하기\n3. 출금하기\n4. 전체조회\n5. 프로그램 종료")
+            print("====================")
+            first = int(input("입력: "))
+            return first
+        except:
+            print("===잘못된 입력입니다.===")
+        
 
  
 
