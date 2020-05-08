@@ -25,11 +25,7 @@ class Account():
                 print("이름 입력이 올바르지 않습니다.")
         except:
             print("계좌번호 입력이 올바르지 않습니다.")
-        
-        
-        
-        
-            
+               
     def manage(self): #잔액 조회
         print("======전체조회======")
         for i in self.account_list :
@@ -81,4 +77,59 @@ class Account():
                 print("해당 계좌가 존재하지 않습니다.")
         except:
             print("\n===잘못된 계좌번호 입니다.===")
+        
+class Transfer(Account):
+    findaccount = 0
+    def bank_transfer(self):
+        print("======계좌 이체=====")
+        #내 계좌 선택
+        try:
+            sender = int(input("사용하실 계좌를 입력해주세요: "))
+        except:
+            print("잘못된 입력입니다.")
+        for j in self.account_list:
+            if j == sender:
+                sendindex = j #보내는 사람의 계좌 인덱스
+        if sender in self.account_list:
+            try:
+                getter = int(input("이체하실 계좌번호를 입력해주세요: "))                      
+                for i in self.account_list:
+                    if i == getter:
+                        if getter == sender:
+                            #보내는 계좌와 받는계좌가 같을 경우는 예외
+                            print("받는 이가 보내는이와 동일한 계좌입니다.")
+                            
+                        else:
+                            index = i #받는 사람의 계좌 인덱스
+
+                
+                if getter in self.account_list:
+                    print("예금주: ",self.name_list[index],"가 맞습니까?")
+                    check = input("Y/N: ")
+                    if check == 'y' or check == 'Y': #일치
+                        #입금 진행
+                        money = int(input("입금 금액을 입력: "))
+                        
+                        #금액이 잔액보다 크면 잔액부족
+                        if money > self.account_list[sender]:
+                            print("잔액이 부족합니다.")
+                        else:
+                            #입금 처리, -> getter의 계좌에 money를 더해준다.
+                            #sender의 계좌에서 money를 빼준다. -> sender의 잔액을 표시해준다.
+                            # 예금주, 보낸금액, 보내는 계좌에 대한 출력 후 완료
+                            self.account_list[index] = self.account_list[index] + money
+                            self.account_list[sendindex] = self.account_list[sendindex] - money
+                            print("받는 사람 : ",self.name_list[index])
+                            print("출금 계좌 : ", sender)
+                            print("이체 금액 :  ", self.account_list[sendindex],"원")
+                            print('출금 계좌 잔액 : ', self.account_list[sendindex],"원")
+
+                    elif check == 'n' or check == 'N':#불일치
+                        print("거래가 취소되었습니다.")
+                    else:
+                        print("잘못된 입력입니다.")
+                else:
+                    print("존재하지 않는 계좌입니다.")
+            except:
+                print("잘못된 입력입니다.")
         
